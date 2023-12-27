@@ -32,7 +32,5 @@ module GestionNegocioBack
     config.api_only = true
 
     # Add Middleware for Cookies and Flash
-    # config.middleware.use ActionDispatch::Cookies
-    # config.middleware.use ActionDispatch::Flash
   end
 end

@@ -1,15 +1,27 @@
 class Users::SessionsController < Devise::SessionsController
+  include RackSessionFix
   respond_to :json
 
-  # This is Devise's method for signing in a user
-  # Override it to customize the sign-in process
-  def create
-    self.resource = warden.authenticate!(auth_options)
-    if resource
-      sign_in(resource_name, resource)
-      render json: { message: 'Login successful', user: resource }, status: :ok
+  private
+
+  def respond_with(resource, _opts = {})
+    render json: {
+      status: { code: 200, message: 'Logged in sucessfully.' },
+      data: UserSerializer.new(resource).serializable_hash[:data][:attributes]
+    }, status: :ok
+  end
+
+  def respond_to_on_destroy
+    if current_user
+      render json: {
+        status: 200,
+        message: 'logged out successfully'
+      }, status: :ok
     else
-      render json: { error: 'Invalid credentials' }, status: :unauthorized
+      render json: {
+        status: 401,
+        message: "Couldn't find an active session."
+      }, status: :unauthorized
     end
   end
 end
