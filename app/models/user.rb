@@ -8,6 +8,7 @@ class User < ApplicationRecord
   validates :document_id, presence: true
   validates :address, presence: true
   validates :phone, presence: true
+  validates :sede, presence: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
