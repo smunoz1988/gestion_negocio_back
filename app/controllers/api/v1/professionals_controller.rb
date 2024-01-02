@@ -26,9 +26,9 @@ class Api::V1::ProfessionalsController < ApplicationController
   def update
     professional = Professional.find(params[:id])
     if professional.update(professional_params)
-      render json: @professional, status: :ok
+      render json: professional, status: :ok
     else
-      render json: @professional.errors, status: :unprocessable_entity
+      render json: professional.errors, status: :unprocessable_entity
     end
   end
 
@@ -38,4 +38,9 @@ class Api::V1::ProfessionalsController < ApplicationController
     professional.destroy
     render json: professional, status: :ok
   end
+
+  def professional_params
+    params.require(:professional).permit(:name, :last_name, :document_id, :email, :phone, :role, :address, :birthday)
+  end
+ 
 end
