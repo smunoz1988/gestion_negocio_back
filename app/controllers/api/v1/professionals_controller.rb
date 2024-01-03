@@ -40,7 +40,7 @@ class Api::V1::ProfessionalsController < ApplicationController
   end
 
   def professional_params
-    params.require(:professional).permit(:name, :last_name, :document_id, :email, :phone, :role, :address, :birthday)
+    params.require(:professional).permit(:name, :last_name, :document_id, :email, :phone, :role, :address, :birthday, :photo)
   end
  
 end
