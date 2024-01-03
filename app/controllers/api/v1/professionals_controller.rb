@@ -1,5 +1,4 @@
 class Api::V1::ProfessionalsController < ApplicationController
-
   # create professionals
   def create
     @professional = Professional.new(professional_params)
@@ -42,5 +41,4 @@ class Api::V1::ProfessionalsController < ApplicationController
   def professional_params
     params.require(:professional).permit(:name, :last_name, :document_id, :email, :phone, :role, :address, :birthday, :photo)
   end
- 
 end
